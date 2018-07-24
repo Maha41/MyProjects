@@ -1,0 +1,99 @@
+.game-header {
+  color: #fff;
+
+  position: relative;
+}
+
+.game-header>.score-block {
+  display: inline-block;
+}
+
+.score-block>.score {
+  position: absolute;
+  color: #fff;
+  top: 5px;
+}
+
+.score-block>.best-score {
+  position: absolute;
+  color: #fff;
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.game-header>.logo {
+  display: inline-block;
+  color: #fff;
+  padding-left: 15px;
+}
+
+.container {
+  width: 280px;
+  position: relative;
+  display: block;
+  margin: auto;
+  background-color: #47565A;
+  border-radius: 5px;
+}
+
+.row {
+  height: 26px;
+}
+
+.column {
+  border: 1px solid rgba(97, 131, 138, .1);
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+
+.start-button {
+  padding: 15px;
+  text-align: center;
+  background-color: #47565A;
+  color: white;
+  border-radius: 5px;
+}
+
+.start-button:hover {
+  opacity: 0.65;
+  cursor: pointer;
+}
+
+.start-button.new-game-button {
+  margin: 0 105px 4px 105px;
+}
+
+.disable-clicks {
+  pointer-events: none;
+}
+
+.new-menu {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  bottom: 0;
+  padding: 40% 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.new-menu-label {
+  font-size: 1.17em;
+  margin-bottom: 13px;
+  display: block;
+  color: #fff;
+}
+
+.new-best-score {
+  animation: glow .5s infinite alternate;
+}
+
+@keyframes glow {
+  to {
+    text-shadow: 0 0 15px #ffff00;
+  }
+}
+
+ 
+
