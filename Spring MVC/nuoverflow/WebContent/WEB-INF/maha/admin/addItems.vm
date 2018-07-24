@@ -1,0 +1,363 @@
+<html>
+<head>
+
+<title>Post</title>
+</head>
+<body>
+<div>
+<div class="row">
+
+            <div class="col-sm-12" style="text-align: center">
+                <h1 class="page-header">Posts</h1>
+            </div>
+</div>
+<div style="min-height: 10px"></div>
+ 
+ <div class="row">
+ <div class="col-sm-6">
+ <input type="button" value="Add Post" onclick="displayDiv()" class="btn btn-success"/>
+ </div>
+ 
+ </div> 
+ 
+  
+ <div style="min-height: 30px"></div>
+ <div id = "addPost" style="display:none">
+ <h4>Add Post</h4>    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="addItems.htm"  method="post" onsubmit="return ValidateItems()" >
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Post: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <input type="text" name="itemName" id="alphanum1" class = "form-control" required/>
+	          </div>
+	         
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Subcategory: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <select name="subcategory" id ="subcategory" class = "form-control" required>
+	          <option value="None"><---Select---></option>
+	          #foreach($subcat in $subcatList)
+	          <option value="${subcat.subCatId}">${subcat.subCatName}</option>
+	          #end
+	          
+	          </select>
+	          
+	          </div>
+	         
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Job: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <select name="jobs" id ="jobs" class = "form-control">
+	          <option value="None"><---Select---></option>
+	          #foreach($jobs in $jobList)
+	          <option value="${jobs.jobbid}">${jobs.jobName}</option>
+	          #end
+	          
+	          </select>
+	          
+	          </div>
+	         
+       </div>
+         <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Description: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <textarea name="description" id="textarea1" class = "form-control" required></textarea>
+	          </div>
+	         
+       </div>
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Benefits: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <textarea name="benifits" id="textarea2" class = "form-control" required></textarea>
+	          </div>
+	         
+       </div>
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Procedures: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <textarea name="procedure" id="textarea3" class = "form-control" required></textarea>
+	          </div>
+	         
+       </div>
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+         <div class="row">
+        	<div class="col-sm-12">
+        	
+         		 <input type="submit" value="Add" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+<div id = "editPost" style="display:none">
+ <h4>Edit Post</h4>    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="editItems.htm"  method="post">
+          <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Post: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <input type="text" name="itemName" id="itemname1" class = "form-control" required/>
+	          </div>
+	         
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Subcategory: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <select name="subcategory" id ="subcategory1" class = "form-control" required>
+	          <option value="None"><---Select---></option>
+	          #foreach($subcat in $subcatList)
+	          <option value="${subcat.subCatId}">${subcat.subCatName}</option>
+	          #end
+	          
+	          </select>
+	          
+	          </div>
+	         
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Job: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <select name="jobs" id ="jobs1" class = "form-control">
+	          <option value="None"><---Select---></option>
+	          #foreach($jobs in $jobList)
+	          <option value="${jobs.jobid}">${jobs.jobName}</option>
+	          #end
+	          
+	          </select>
+	          
+	          </div>
+	         
+       </div>
+         <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Description: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <textarea name="description" id="description1" class = "form-control" required></textarea>
+	          </div>
+	         
+       </div>
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Benefits: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <textarea name="benifits" id="benefits1" class = "form-control" required></textarea>
+	          </div>
+	         
+       </div>
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Procedures: 
+				</div>
+	          	<div class="col-sm-4" >    
+	          <textarea name="procedure" id="procedure1" class = "form-control" required></textarea>
+	          </div>
+	         
+       </div>
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+         <div class="row">
+        	<div class="col-sm-12">
+        		<input type="hidden" name="itemId" id="itemid1" />
+         		 <input type="submit" value="Update" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+
+#if($message == "Item Already Exist")
+<font color="green">$message</font>
+#else
+<div class="row" >
+<div class="col-sm-12" style="text-align: center">
+ #if($itemlist.size() == 0)
+ <font color="red">No Data found</font>
+  #else
+  <table class="table table-bordered">
+  <thead>
+  <tr>
+      <th>Post Id </th>
+      <th> Post </th>
+      <th> Post Date </th>
+      <th> Subcategory </th>
+      <th>Delete</th>
+      <th>Edit</th>
+  </tr>  
+  </thead>        
+	<tbody>
+	#foreach($item in $itemlist)
+	
+   	<tr id="item${item.itemId}">
+   	<td>${item.itemId}</td>
+   		<td><a class="thumbnail" href="#" data-placement="top" data-toggle="popover" data-trigger="hover" data-content="${item.description}">${item.itemName}</a></td>
+   		<td>${item.postDate}</td>
+   		<td>${item.subcat.subCatName}</td>
+   		<td><a href="#" onclick= "deleteRow(${item.itemId})" class="glyphicon glyphicon-trash" ></a></td>
+   		<td><a href="#" onclick= "displayDivEdit(${item.itemId},'${item.itemName}','${item.description}','${item.benefits}','${item.procedurestep}',${item.jobs.jobid},${item.subcat.subCatId})" class="glyphicon glyphicon-pencil" ></a></td>
+   	</tr>
+   	
+ 	#end
+ 	</tbody>
+ 	</table>
+#end	
+ 
+ </div>
+ </div>
+ 
+#end
+<script>
+function displayDiv()
+{
+	var dividadd = document.getElementById("addPost");
+	var dividedit = document.getElementById("editPost");
+	dividadd.style.display = "block";
+	dividedit.style.display = "none";
+}
+function displayDivEdit(itemid1,itemname1,description1,benefits1,proc1,jobid1,subcatid1)
+{
+
+	var dividadd = document.getElementById("addPost");
+	var dividedit = document.getElementById("editPost");
+	dividadd.style.display = "none";
+	dividedit.style.display = "block";
+	var itemnamebox = document.getElementById("itemname1");
+	var descbox = document.getElementById("description1");
+	var benefitbox = document.getElementById("benefits1");
+	var procbox = document.getElementById("procedure1");
+	var applybox = document.getElementById("jobs1");
+	var subcatbox = document.getElementById("subcategory1");
+	var hiddenbox = document.getElementById("itemid1");
+	itemnamebox.value = itemname1;
+	descbox.value = description1;
+	benefitbox.value = benefits1;
+	procbox.value = proc1;
+	
+	for(var i=0; i < applybox.options.length; i++)
+  {
+    if(applybox.options[i].value == jobid1) {
+      applybox.selectedIndex = i;
+      break;
+    }
+  }
+  
+  for(var i=0; i < subcatbox.options.length; i++)
+  {
+    if(subcatbox.options[i].value == subcatid1) {
+      subcatbox.selectedIndex = i;
+      break;
+    }
+  }
+	hiddenbox.value = itemid1;
+}
+ var xmlHttp;
+        xmlHttp = GetXmlHttpObject();
+ function deleteRow(itemid) {
+ var r = confirm("Are you sure you want to Delete?");
+ if(r==true)
+ {
+            if (xmlHttp == null)
+            {
+                alert("Your browser does not support AJAX!");
+                return;
+            }
+
+            var query = "itemid=" + itemid;
+
+            xmlHttp.onreadystatechange = function stateChanged()
+            {
+                if (xmlHttp.readyState == 4)
+                {
+                	var rowid = "item"+itemid;
+                    var row = document.getElementById(rowid);
+                    
+                    row.parentNode.removeChild(row);
+                }
+            };
+            xmlHttp.open("POST", "deleteItems.htm", true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.send(query);
+            
+            return false;
+            }
+        }
+        function GetXmlHttpObject()
+        {
+            var xmlHttp = null;
+            try
+            {
+                // Firefox, Opera 8.0+, Safari
+                xmlHttp = new XMLHttpRequest();
+            } catch (e)
+            {
+                // Internet Explorer
+                try
+                {
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e)
+                {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xmlHttp;
+        }
+
+</script>
+
+</div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
+</body>
+</html>

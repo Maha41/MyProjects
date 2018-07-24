@@ -1,0 +1,29 @@
+
+  <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js'></script>
+	<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+        
+     
+
+    
+  <div class="row">
+
+
+    
+    <ul  class="nav nav-pills" role="tablist">
+      <li class="active"><a href="home.htm">Home</a></li>
+      <li><a href="Alljob.htm">Jobs</a></li>
+      <li><a href="AllFAQ.htm">FAQ</a></li>
+      <li><a href="Alluser.htm">Contact Us</a></li>
+      
+   
+
+      <li class="dropdown"><a href="SignupProfile.htm"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    </ul>
+    </div>
+ 
+</nav>
+
+
+  </div>
+  

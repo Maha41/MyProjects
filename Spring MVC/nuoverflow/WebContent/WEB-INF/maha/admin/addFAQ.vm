@@ -1,0 +1,246 @@
+<html>
+<head>
+
+<title>FAQ</title>
+</head>
+<body>
+<div>
+<div class="row">
+
+            <div class="col-sm-12" style="text-align: center">
+                <h1 class="page-header">FAQ</h1>
+            </div>
+</div>
+#if($message == "FAQ Already Exist")
+<font color= #C06C84>$message</font>
+#else
+<div class="row" >
+<div class="col-sm-12" style="text-align: center">
+ #if($faqList.size() == 0)
+ <font color="red">No Data found</font>
+  #else
+  <table class="table table-bordered">
+  <thead>
+  <tr>
+      <th>Question Id </th>
+      <th> Question</th>
+      <th> Delete </th>
+      <th> Edit </th>
+  </tr>  
+  </thead>        
+	#foreach($faq in $faqList)
+	<tbody>
+   	<tr id="faq${faq.faqId}">
+   		<td>${faq.faqId}</td>
+   		<td><a class="thumbnail" href="#" data-placement="top" data-toggle="popover" data-trigger="hover" data-content="${faq.answer}">${faq.question}</a></td>
+   		<td><a href="#" onclick= "deleteRow(${faq.faqId})" class="glyphicon glyphicon-trash" ></a></td>
+   		<td><a href="#" onclick= "displayDivEdit(${faq.faqId},'${faq.question}','${faq.answer}')" class="glyphicon glyphicon-pencil" ></a></td>
+   	</tr>
+   	</tbody>
+ 	#end
+ 	</table>
+#end	
+ 
+ </div>
+ </div>
+ <div style="min-height: 10px"></div>
+ 
+ <div>
+ <div>
+ <input type="button" value="Add FAQ" onclick="displayDiv()" />
+ </div>
+ 
+ </div> 
+ 
+  
+ <div style="min-height: 30px"></div>
+ <div id = "addFAQ" style="display:none">
+ <h4>Add FAQ</h4>    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="addFAQ.htm"  method="post" onsubmit="return ValidateData()" >
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Question: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		#springBind("faq.question")    
+	          <input type="text" name="question" id="alphanum1" class = "form-control" required/>
+	          </div>
+	          <div class="col-sm-8">
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+           <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Answer: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		#springBind("faq.answer")    
+	          <textarea name="answer" id="textarea1" class = "form-control" required></textarea>
+	          </div>
+	          <div class="col-sm-8">
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+         <div class="row">
+        	<div class="col-sm-12">
+        	
+         		 <input type="submit" value="Add" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+<div id = "editFAQ" style="display:none">
+ <h4>Edit FAQ</h4>    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="editFAQ.htm"  method="post" >
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Question: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		#springBind("faq.question")    
+	          <input type="text" name="question" id="question1" class = "form-control" pattern="[A-Za-z0-9\?]{1,100}" title="Only Alphanumeric allowed" required/>
+	          </div>
+	          <div class="col-sm-8">
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+           <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Answer: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		#springBind("faq.answer")    
+	          <textarea name="answer" id="answer1" class = "form-control" pattern="[A-Za-z0-9\?]{1,100}" title="Only Alphanumeric allowed" required></textarea>
+	          </div>
+	          <div class="col-sm-8">
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+         <div class="row">
+        	<div class="col-sm-12">
+        		<input type="hidden" name="faqId" id="faqId" />
+         		 <input type="submit" value="Edit" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+
+#end
+<script>
+function displayDiv()
+{
+	var dividadd = document.getElementById("addFAQ");
+	var dividedit = document.getElementById("editFAQ");
+	dividadd.style.display = "block";
+	dividedit.style.display = "none";
+}
+function displayDivEdit(faqid1,question,answer)
+{
+
+	var dividadd = document.getElementById("addFAQ");
+	var dividedit = document.getElementById("editFAQ");
+	dividadd.style.display = "none";
+	dividedit.style.display = "block";
+	var questionbox = document.getElementById("question1");
+	var answerbox = document.getElementById("answer1");
+	var hiddenbox = document.getElementById("faqId");
+	questionbox.value = question;
+	answerbox.value = answer;
+	hiddenbox.value = faqid1;
+}
+ var xmlHttp;
+        xmlHttp = GetXmlHttpObject();
+ function deleteRow(faqID) {
+ var r = confirm("Are you sure you want to Delete?");
+ if(r==true)
+ {
+            if (xmlHttp == null)
+            {
+                alert("Your browser does not support AJAX!");
+                return;
+            }
+
+            var query = "faqid=" + faqID;
+
+            xmlHttp.onreadystatechange = function stateChanged()
+            {
+                if (xmlHttp.readyState == 4)
+                {
+                	var rowid = "faq"+faqID;
+                    var row = document.getElementById(rowid);
+                    
+                    row.parentNode.removeChild(row);
+                }
+            };
+            xmlHttp.open("POST", "deleteFAQ.htm", true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.send(query);
+            
+            return false;
+            }
+        }
+        function GetXmlHttpObject()
+        {
+            var xmlHttp = null;
+            try
+            {
+                // Firefox, Opera 8.0+, Safari
+                xmlHttp = new XMLHttpRequest();
+            } catch (e)
+            {
+                // Internet Explorer
+                try
+                {
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e)
+                {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xmlHttp;
+        }
+
+</script>
+
+</div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
+</body>
+</html>

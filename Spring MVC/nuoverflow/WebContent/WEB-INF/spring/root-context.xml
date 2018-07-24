@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		<bean id="regLoginValidator" class="com.neu.me.validator.LoginValidator" />
+		<bean id="regUserValidator" class="com.neu.me.validator.UserValidator" />
+		
+		<bean id="regCategoryValidator" class="com.neu.me.validator.CategoryValidator" />
+		<bean id="regSubCategoryValidator" class="com.neu.me.validator.SubCategoryValidator" />
+		<bean id="regJobValidator" class="com.neu.me.validator.JobValidator" />
+		<bean id="regFAQValidator" class="com.neu.me.validator.FAQValidator" />
+		
+		<bean id="userDao" class="com.neu.me.dao.UserDao" />
+		<bean id="catDao" class="com.neu.me.dao.CategoryDao" />
+		<bean id="subcatDao" class="com.neu.me.dao.SubCategoryDao" />
+		<bean id="jobDao" class="com.neu.me.dao.JobsDao" />
+		<bean id="itemDao" class="com.neu.me.dao.ItemsDao" />
+		<bean id="faqDao" class="com.neu.me.dao.FAQDao" />
+		<bean id="personDao" class="com.neu.me.dao.PersonDao" />
+		<bean id="likeDao" class="com.neu.me.dao.LikeDao" />
+		<bean id="commentDao" class="com.neu.me.dao.CommentDao" />
+		
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+</beans>

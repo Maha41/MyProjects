@@ -1,0 +1,39 @@
+<!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        $username
+                    </a>
+                </li>
+                <li>
+                    <a href="adminHome.htm">Home</a>
+                </li>
+                
+                <li>
+                    <a href="addCategory.htm">Category</a>
+                </li>
+                <li>
+                    <a href="addSubCategory.htm">SubCategory</a>
+                </li>
+                <li>
+                    <a href="addjob.htm">Jobs</a>
+                </li>
+                 <li>
+                    <a href="addItems.htm">Posts</a>
+                </li>
+                <li>
+                    <a href="addFAQ.htm">FAQ</a>
+                </li>
+          
+                <li>
+                    <a href="updateProfile.htm">Update Profile</a>
+                </li>
+                
+                <li>
+                    <a href="logout.htm">Logout</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->

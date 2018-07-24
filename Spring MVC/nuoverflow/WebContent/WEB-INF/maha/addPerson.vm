@@ -1,0 +1,198 @@
+<html>
+<head>
+
+<title>Profile</title>
+</head>
+<body>
+<div>
+<div class="row">
+
+            <div class="col-sm-12" style="text-align: center">
+                <h1 class="page-header">Update Profile</h1>
+            </div>
+</div>
+
+ <font color="green">$message</font>
+ <div style="min-height: 30px"></div>
+ <div id = "addUser" style="block">
+    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="updateProfile.htm"  method="post" onsubmit="return ValidateData()" >
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 First Name: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		    #springBind("userAccount.person.firstName")
+	          <input type="text" name="${status.expression}" id="text1" value="$!status.value" class = "form-control" required/>
+	          </div>
+	         <div class="col-sm-4">
+          <font color="red">${status.errorMessage}</font>
+          </div>
+       </div>
+          <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Last name: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		    #springBind("userAccount.person.lastName")
+	          <input type="text" name="${status.expression}" value="$!status.value"  id="text2" class = "form-control" required/>
+	          </div>
+	         <div class="col-sm-4">
+          <font color="red">${status.errorMessage}</font>
+          </div>
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Email: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		    #springBind("userAccount.person.email")
+	          <input type="text" name="${status.expression}" value="$!status.value" id="email1"  class = "form-control" required/>
+	          </div>
+	         <div class="col-sm-4">
+          <font color="red">${status.errorMessage}</font>
+          </div>
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Phone: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		    #springBind("userAccount.person.phone")
+	          <input type="text" name="${status.expression}" value="$!status.value" id="phone1"  class = "form-control" required/>
+	          </div>
+	         <div class="col-sm-4">
+          <font color="red">${status.errorMessage}</font>
+          </div>
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Age: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		    #springBind("userAccount.person.age")
+	          <input type="number" name="${status.expression}" value="$!status.value" id = "num1" pattern="[0-9]{1,3}" min="1" max="120" class = "form-control" required/>
+	          </div>
+	         <div class="col-sm-4">
+          <font color="red">${status.errorMessage}</font>
+          </div>
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Username: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		    #springBind("userAccount.username")
+	          <input type="text" name="${status.expression}" value="$!status.value" id="username1" onblur= "return checkUser()" class = "form-control" required/>
+	          </div>
+	         <div class="col-sm-4">
+	         <label id = "error" style="color:red" >
+				</label>
+          <font color="red">${status.errorMessage}</font>
+          </div>
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Password: 
+				</div>
+	          	<div class="col-sm-5" >
+	  		    #springBind("userAccount.password")
+	          <input type="password" name="${status.expression}" value="$!status.value" id="password1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@#]).{6,}" title="Minimum 6 characters including atleast 1 Upper case, 1 lower case 1 number and 1 special character $@# required" class = "form-control" required/>
+	          </div>
+	         <div class="col-sm-4">
+          <font color="red">${status.errorMessage}</font>
+          </div>
+       </div>
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+         <div class="row">
+        	<div class="col-sm-12">
+        	#springBind("userAccount.id")
+        	<input type="hidden" name="${status.expression}" value="$!status.value" />
+        	#springBind("userAccount.person.personid")
+        	<input type="hidden" name="${status.expression}" value="$!status.value" />
+         	#springBind("userAccount.role")
+        	<input type="hidden" name="${status.expression}" value="$!status.value" />
+         	#springBind("userAccount.status")
+        	<input type="hidden" name="${status.expression}" value="$!status.value" />
+         		 <input type="submit" value="Update" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+<script>
+var xmlHttp;
+        xmlHttp = GetXmlHttpObject();
+        function checkUser() {
+           if (xmlHttp == null)
+            {
+                alert("Your browser does not support AJAX!");
+                return;
+            }
+            var username = document.getElementById("username1").value;
+            
+
+            xmlHttp.onreadystatechange = function stateChanged()
+            {
+                if (xmlHttp.readyState == 4)
+                {
+                   
+                    document.getElementById("error").innerHTML = xmlHttp.responseText;
+                    if(xmlHttp.responseText == "")
+                    {
+                    	
+                    }
+                    else
+                    {
+                    	
+                    	document.getElementById("username1").value="";
+                    }
+                }
+            };
+            xmlHttp.open("GET", "SignupUserProfile.htm?username="+username, true);
+            
+            xmlHttp.send();
+           return false;
+        }
+        
+         function GetXmlHttpObject()
+        {
+            var xmlHttp = null;
+            try
+            {
+                // Firefox, Opera 8.0+, Safari
+                xmlHttp = new XMLHttpRequest();
+            } catch (e)
+            {
+                // Internet Explorer
+                try
+                {
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e)
+                {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xmlHttp;
+        }
+        
+
+</script>
+
+</body>
+</html>

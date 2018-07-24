@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>ContactUs</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+</head>
+<body  style="padding:0;margin:0">
+ <div style="padding:0;margin:0">
+
+
+<div style="min-height: 50px"></div>
+
+<div ng-app="" ng-init="names=$personList ">
+<div ng-repeat="person in names">
+  <h3>{{person.firstname}} {{person.lastname}}</h3>
+  <p>Email: {{person.email}}</p>
+  <p>Phone: {{person.phone}}</p>
+   
+</div>
+</div>
+</div>
+
+</body>
+</html>

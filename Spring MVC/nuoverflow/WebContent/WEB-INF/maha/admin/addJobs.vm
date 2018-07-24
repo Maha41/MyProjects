@@ -1,0 +1,318 @@
+<html>
+<head>
+
+<title>Job</title>
+</head>
+<body>
+<div>
+<div class="row">
+
+            <div class="col-sm-12" style="text-align: center">
+                <h1 class="page-header">Jobs</h1>
+            </div>
+</div>
+<div style="min-height: 10px"></div>
+ 
+ <div class="row">
+ <div class="col-sm-6">
+ <input type="button" value="Add Job" onclick="displayDiv()" class="btn btn-success"/>
+ </div>
+ 
+ </div> 
+ 
+  
+ <div style="min-height: 30px"></div>
+ <div id = "addJob" style="display:none">
+ <h4>Add Job</h4>    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="addjob.htm"  method="post" onsubmit="return ValidateJob()" enctype="multipart/form-data" >
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Job Name: 
+				</div>
+	          	<div class="col-sm-4" >
+	  		#springBind("job.jobName")    
+	          <input type="text" name="jobName" id="alphanum1" class = "form-control" required/>
+	          </div>
+	          <div class="col-sm-5">
+	          *Only Alphanumeric allowed
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+      
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Company Name: 
+				</div>
+	          	<div class="col-sm-4" >
+	  		#springBind("job.companyname")    
+	          <input type="text" name="companyname" id="text1" class = "form-control" required/>
+	          </div>
+	          <div class="col-sm-5">
+	          *Only Alphabets allowed
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Job type: 
+				</div>
+	          	<div class="col-sm-4" >
+	  		#springBind("job.companylogo")    
+	          <input type="text" name="companylogo" id="alphanum2" class = "form-control" required/>
+	          </div>
+	          <div class="col-sm-5">
+	          *Only Alphanumeric allowed
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 company logo: (size 400 X 400)
+				</div>
+	          	<div class="col-sm-4" >
+	  		#springBind("job.CompanyImage")    
+	          <input type="file" name="CompanyImage" class = "form-control" id="filetype" required/>
+	          </div>
+	          <div class="col-sm-5">
+	          
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		Job Description: 
+				</div>
+	          	<div class="col-sm-4" >
+	  		#springBind("job.jobdescription")    
+	          <textarea name="jobdescription" id="textarea1" class = "form-control" pattern = "[A-Za-z0-9.,? ]{1,2000}" title="Only Alphanumeric 2000 characters required" required></textarea>
+	          </div>
+	          <div class="col-sm-5">
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+      
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+         <div class="row">
+        	<div class="col-sm-12">
+        	
+         		 <input type="submit" value="Add" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+<div id = "editJob" style="display:none">
+ <h4>Edit Job</h4>    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="editjob.htm"  method="post" >
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Job Name: 
+				</div>
+	          	<div class="col-sm-4" >
+	  		#springBind("job.jobName")    
+	          <input type="text" name="jobName" id = "jobname1" class = "form-control" pattern = "[A-Za-z0-9 ]{1,50}" title="Only Alphanumeric required" required/>
+	          </div>
+	          <div class="col-sm-5">
+	          *Only Alphanumeric allowed
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+      
+        <div class="row">
+	        	<div class="col-sm-3" >
+	         		 Compan6y Name: 
+				</div>
+	          	<div class="col-sm-4" >
+	  		#springBind("job.companyname")    
+	          <input type="text" name="companyname" id="companyname1" class = "form-control" pattern = "[A-Za-z0-9 ]{1,50}" title="Only Alphanumeric required" required/>
+	          </div>
+	          <div class="col-sm-5">
+	          *Only Alphanumeric allowed
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+       <div class="row">
+	        	<div class="col-sm-3" >
+	         		Job Description: 
+				</div>
+	          	<div class="col-sm-4" >
+	  		#springBind("job.jobdescription")    
+	          <textarea name="jobdescription" id="jobdescription1" class = "form-control" pattern = "[A-Za-z0-9 ]{1,2000}" title="Only Alphanumeric 2000 characters required" required></textarea>
+	          </div>
+	          <div class="col-sm-5">
+	          
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+       
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+      
+         <div class="row">
+        	<div class="col-sm-12">
+	#springBind("job.companylogo")    
+	<input type = "hidden" name="companylogo" id = "companylogo1"  />
+        		<input type = "hidden" name="jobid" id = "jobid1"  />
+         		 <input type="submit" value="Update" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+
+#if($message == "Job Alreay Exist")
+<font color="green">$message</font>
+#else
+<div class="row" >
+<div class="col-sm-12" style="text-align: center">
+ #if($jobbList.size() == 0)
+ <font color="red">No Data found</font>
+  #else
+  <table class="table table-bordered">
+  <thead>
+  <tr>
+      <th>Job Id </th>
+      <th> Job Name </th>
+      <th> Company Name </th>
+      <th> Image </th>
+      <th> Delete </th>
+      <th> Edit </th>
+  </tr>  
+  </thead>        
+	#foreach($jobs in $jobList)
+	<tbody>
+   	<tr id="job${jobs.jobid}">
+   		<td>${jobs.jobid}</td>
+   		<td><a class="thumbnail" href="#" data-placement="top" data-toggle="popover" data-trigger="hover" data-content="${jobs.jobdescription}">${jobs.jobName}</a></td>
+   		<td>${jobs.companyname}</td>
+   		<td><img src="resources/images/company${jobs.companylogo}" width="60px" height = "60px" />  </td>
+   		<td><a href="#" onclick= "deleteRow(${jobs.jobid})" class="glyphicon glyphicon-trash" ></a></td>
+   		<td><a href="#" onclick= "displayDivEdit(${jobs.jobid},'${jobs.jobName}','${jobs.companyname}','${jobbs.jobdescription}','${jobs.companylogo}')" class="glyphicon glyphicon-pencil" ></a></td>
+   	</tr>
+   	</tbody>
+ 	#end
+ 	</table>
+#end	
+ 
+ </div>
+ </div>
+ 
+#end
+<script>
+function displayDiv()
+{
+	var dividadd = document.getElementById("addJob");
+	var dividedit = document.getElementById("editJob");
+	dividadd.style.display = "block";
+	dividedit.style.display = "none";
+}
+function displayDivEdit(jobid1,jobname1,companyname1,jobdescription1, companylogo1)
+{
+
+	var dividadd = document.getElementById("addJob");
+	var dividedit = document.getElementById("editJob");
+	dividadd.style.display = "none";
+	dividedit.style.display = "block";
+	var jobnamebox = document.getElementById("jobname1");
+	var companybox = document.getElementById("companyname1");
+	var jobdescriptionbox = document.getElementById("jobdescription1");
+	var jobidbox = document.getElementById("jobid1");
+	var imagenamebox = document.getElementById("companylogo1");
+	jobnamebox.value = jobname1;
+	scientificbox.value = companyname1;
+	descriptionbox.value = jobdescription1;
+	imagenamebox.value = companylogo1;
+	
+	jobidbox.value = jobid1;
+}
+ var xmlHttp;
+        xmlHttp = GetXmlHttpObject();
+ function deleteRow(jobid) {
+ var r = confirm("Are you sure you want to Delete?");
+ if(r==true)
+ {
+            if (xmlHttp == null)
+            {
+                alert("Your browser does not support AJAX!");
+                return;
+            }
+
+            var query = "jobid=" + jobid;
+
+            xmlHttp.onreadystatechange = function stateChanged()
+            {
+                if (xmlHttp.readyState == 4)
+                {
+                	var rowid = "job"+jobid;
+                    var row = document.getElementById(rowid);
+                    
+                    row.parentNode.removeChild(row);
+                }
+            };
+            xmlHttp.open("POST", "deletejob.htm", true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.send(query);
+            
+            return false;
+            }
+        }
+        function GetXmlHttpObject()
+        {
+            var xmlHttp = null;
+            try
+            {
+                // Firefox, Opera 8.0+, Safari
+                xmlHttp = new XMLHttpRequest();
+            } catch (e)
+            {
+                // Internet Explorer
+                try
+                {
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e)
+                {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xmlHttp;
+        }
+
+</script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
+</div>
+
+</body>
+</html>

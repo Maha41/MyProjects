@@ -1,0 +1,387 @@
+<html>
+<head>
+
+<title>Sub Category</title>
+</head>
+<body>
+<div>
+<div class="row">
+
+            <div class="col-sm-12" style="text-align: center">
+                <h1 class="page-header">Sub Category</h1>
+            </div>
+</div>
+<div class="row">
+
+            <div class="col-sm-12">
+              <select onchange = "displaysubcat(this.value)" id = "catlist" name = "catlist">
+            <option value="select"><--Select--></option>
+            #foreach($cats in $catList)
+              <option value="${cats.catId}">${cats.categoryName}</option>
+              #end
+              </select>
+            </div>
+</div>
+<div style="min-height: 10px"></div>
+<div id="successdiv"><font color="green">$message</font></div>
+
+
+
+<div class="row" >
+<div class="col-sm-12" style="text-align: center">
+ #if($subcatList.size() == 0)
+ <font color="red">No Data found</font>
+  #else
+  <div id= "results"></div>
+#end	
+ 
+ </div>
+ </div>
+ <div style="min-height: 10px"></div>
+ 
+ <div class="row">
+ <div class="col-sm-6">
+ <input type="button" value="Add SubCategory" onclick="displayDiv()" class="btn btn-success"/>
+ </div>
+ 
+ </div> 
+ 
+  
+ <div style="min-height: 30px"></div>
+ <div id = "addSubCategory" style="display:none">
+ <h4>Add SubCategory</h4>    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="addSubCategory.htm"  method="post" onsubmit="return ValidateData()" >
+        <div class="row">
+	        	<div class="col-sm-2" >
+	         		 SubCategory Name: 
+				</div>
+	          	<div class="col-sm-2" >
+	  		#springBind("subcategory.subCatName")    
+	          <input type="text" name="subCatName" id="alphanum1" class = "form-control"/> *Only Alphanumeric allowed
+	          </div>
+	          <div class="col-sm-8">
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+         <div class="row">
+        	<div class="col-sm-12">
+        		<input type = "hidden" name="catid" id = "hiddencat" />
+         		 <input type="submit" value="Add" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+<div id = "editSubCategory" style="display:none">
+ <h4>Edit SubCategory</h4>    
+ <div class="row" >
+   <div class="col-sm-12">
+<div class = "form-group">
+<form action="editSubCategory.htm"  method="post" onsubmit="return ValidateSubCat()" >
+        <div class="row">
+	        	<div class="col-sm-2" >
+	         		 SubCategory Name: 
+				</div>
+	          	<div class="col-sm-2" >
+	  		#springBind("subcategory.subCatName")    
+	          <input type="text" name="subCatName" id="subcatname" class = "form-control"/> *Only Alphanumeric allowed
+	          </div>
+	          <div class="col-sm-8">
+	          <font color="red">${status.errorMessage}</font>
+	          </div>
+       </div>
+       <div class="row">
+       		  <div class="col-sm-12">
+        		 #if($error)
+		         $error
+		         
+		         #end
+		      </div>
+       </div>
+         <div class="row">
+        	<div class="col-sm-12">
+        		<input type="hidden" name="subcategoryId" id="subcategoryId" />
+         		 <input type="submit" value="Edit" class="btn btn-success" />
+         	
+          	</div>
+          	
+        </div>
+        
+        </form>
+</div>
+</div>
+</div>
+</div>
+
+
+<script>
+function displayDiv()
+{
+	var catidlist = document.getElementById("catlist");
+	var catid = catidlist.options[catidlist.selectedIndex].value;
+	if(catid != "select")
+	{
+		var dividadd = document.getElementById("addSubCategory");
+		var dividedit = document.getElementById("editSubCategory");
+		dividadd.style.display = "block";
+		dividedit.style.display = "none";
+		var hiddencat = document.getElementById("hiddencat");
+	
+	
+		hiddencat.value = catid;
+	}
+	else
+	{
+		alert('Select any category');
+	} 
+}
+</script>
+<script>
+function displayDivEdit(subcatid,name)
+{
+
+	var dividadd = document.getElementById("addSubCategory");
+	var dividedit = document.getElementById("editSubCategory");
+	dividadd.style.display = "none";
+	dividedit.style.display = "block";
+	var editbox = document.getElementById("subcatname");
+	var hiddenbox = document.getElementById("subcategoryId");
+	editbox.value = name;
+	hiddenbox.value = subcatid;
+}
+</script>
+<script>
+ var xmlHttp;
+        xmlHttp = GetXmlHttpObject();
+ function displaysubcat(catid)
+ {
+ //alert('hi'+catid);
+
+	var hiddencat = document.getElementById("hiddencat");
+
+		hiddencat.value = catid;
+ 	var dividadd = document.getElementById("addSubCategory");
+	var dividedit = document.getElementById("editSubCategory");
+	dividadd.style.display = "none";
+	dividedit.style.display = "none";
+	var div1 = document.getElementById("successdiv");
+
+	div1.innerHTML="";
+
+	if(catid != "select")
+	{
+		//alert('inside');
+	 if (xmlHttp == null)
+            {
+                alert("Your browser does not support AJAX!");
+                return;
+            }
+           
+            var query = "catid=" + catid;
+          //  alert(query);
+            xmlHttp.onreadystatechange = function stateChanged()
+            {
+                if (xmlHttp.readyState == 4)
+                {
+                 document.getElementById("results").innerHTML = "";
+                	var json = JSON.parse(xmlHttp.responseText);
+                    if (json.subcatlist.length > 0) {
+                       var x = document.createElement("TABLE");
+                        x.setAttribute("id", "myTable");
+                        x.className = "table table-bordered";
+                        document.getElementById("results").appendChild(x);
+                        var y = document.createElement("TR");
+                        y.setAttribute("id", "myTr");
+                        document.getElementById("myTable").appendChild(y);
+
+                        var z = document.createElement("TH");
+                        var t = document.createTextNode("SubCategory Id");
+
+                        z.appendChild(t);
+                        document.getElementById("myTr").appendChild(z);
+
+                        var z = document.createElement("TH");
+                        var t = document.createTextNode("Subcategory Name");
+                        z.appendChild(t);
+                        document.getElementById("myTr").appendChild(z);
+
+                        var z = document.createElement("TH");
+                        var t = document.createTextNode("Delete");
+                        z.appendChild(t);
+                        document.getElementById("myTr").appendChild(z);
+
+                        var z = document.createElement("TH");
+                        var t = document.createTextNode("Edit");
+                        z.appendChild(t);
+                        document.getElementById("myTr").appendChild(z);
+                        
+                       
+                		for (var count = 0; count < json.subcatlist.length; count++) {
+                            var y = document.createElement("TR");
+                            y.setAttribute("id", "myTr" + count);
+                            document.getElementById("myTable").appendChild(y);
+
+                            var z = document.createElement("TD");
+                            var t = document.createTextNode(json.subcatlist[count].subCatId);
+                            z.appendChild(t);
+                            document.getElementById("myTr" + count).appendChild(z);
+
+                            var z = document.createElement("TD");
+                            var t = document.createTextNode(json.subcatlist[count].subCatName);
+                            z.appendChild(t);
+                            document.getElementById("myTr" + count).appendChild(z);
+
+                            var z = document.createElement("TD");
+                            var a = document.createElement('a');
+                            var subcatid = json.subcatlist[count].subCatId;
+                            var rowID = "myTr" + count;
+                        
+                            a.className="glyphicon glyphicon-trash";
+                          
+                            a.onclick = (function (subcatid, rowID) {
+                            
+                                return function () {
+                                    deleteRow(subcatid, rowID);
+                                }
+                            })(subcatid, rowID);
+                            z.appendChild(a);
+                            document.getElementById("myTr" + count).appendChild(z);
+                            
+                             var z = document.createElement("TD");
+                            var b = document.createElement('a');
+                            var subcatid = json.subcatlist[count].subCatId;
+                            var subcatname = json.subcatlist[count].subCatName;
+                            var rowID = "myTr" + count;
+                           
+                            b.className="glyphicon glyphicon-pencil";
+                          
+                            b.onclick = (function (subcatid, subcatname) {
+                                return function () {
+                                    displayDivEdit(subcatid, subcatname);
+                                }
+                            })(subcatid, subcatname);
+                            z.appendChild(b);
+                            document.getElementById("myTr" + count).appendChild(z);
+                        }
+                		
+                	}
+                	else
+                	{
+                		 document.getElementById("results").innerHTML="No Data Found";
+                		//alert('not json');
+                	}
+            	}
+           	
+           	};
+            xmlHttp.open("POST", "viewSubCategory.htm", true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.send(query);
+            //alert('sending query');
+            return false;
+         }
+         else
+         {
+         	alert('Select any category');
+         }
+ }
+ function deleteRow(subcatID, rowID) {
+ var r = confirm("Are you sure you want to Delete?");
+ if(r==true)
+ {
+            if (xmlHttp == null)
+            {
+                alert("Your browser does not support AJAX!");
+                return;
+            }
+
+            var query = "subcatid=" + subcatID;
+
+            xmlHttp.onreadystatechange = function stateChanged()
+            {
+                if (xmlHttp.readyState == 4)
+                {
+                	var rowid = rowID;
+                    var row = document.getElementById(rowid);
+                    
+                    row.parentNode.removeChild(row);
+                }
+            };
+            xmlHttp.open("POST", "deleteSubCategory.htm", true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.send(query);
+            
+            return false;
+            }
+        }
+        
+        function editRow(subcatID, rowID) {
+ 
+            if (xmlHttp == null)
+            {
+                alert("Your browser does not support AJAX!");
+                return;
+            }
+
+            var query = "subcatid=" + subcatID;
+
+            xmlHttp.onreadystatechange = function stateChanged()
+            {
+                if (xmlHttp.readyState == 4)
+                {
+                	var rowid = rowID;
+                    var row = document.getElementById(rowid);
+                    var rowvalue = document.getElementById("subcatname");
+                    row.innerHTML = rowvalue.value;
+                    //row.parentNode.removeChild(row);
+                }
+            };
+            xmlHttp.open("POST", ".htm", true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.send(query);
+            
+            return false;
+        }
+        
+        function GetXmlHttpObject()
+        {
+            var xmlHttp = null;
+            try
+            {
+                // Firefox, Opera 8.0+, Safari
+                xmlHttp = new XMLHttpRequest();
+            } catch (e)
+            {
+                // Internet Explorer
+                try
+                {
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e)
+                {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xmlHttp;
+        }
+
+</script>
+
+</div>
+
+</body>
+</html>

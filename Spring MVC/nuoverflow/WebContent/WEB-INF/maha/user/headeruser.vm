@@ -1,0 +1,29 @@
+<!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        $username
+                    </a>
+                </li>
+                <li>
+                    <a href="userLogin.htm">Post</a>
+                </li>
+            
+                <li>
+                    <a href="Alljob.htm">Jobs</a>
+                </li>
+                <li>
+                    <a href="getFAQ.htm">FAQ</a>
+                </li>
+                <li>
+                    <a href="updateProfile.htm">Update Profile</a>
+                </li>
+                
+                <li>
+                    <a href="logout.htm">Logout</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
