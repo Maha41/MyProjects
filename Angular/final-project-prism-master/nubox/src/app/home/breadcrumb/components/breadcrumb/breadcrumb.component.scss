@@ -1,0 +1,40 @@
+.bread_crumb {
+  color: red;
+  position: relative;
+  margin: 25px 0;
+  font-size: 13px;
+  background-color: white !important;
+  li {
+    font-size: 15px;
+    display: inline-block;
+    float: left;
+    margin-right: 5px;
+    color:black;
+    text-transform: capitalize;
+    a {
+      color:black;
+      text-decoration: adjust-hue($color: yellowgreen, $degrees: 0);
+    }
+  }
+  li:after {
+    font-size: 17px;
+    content: '/';
+    margin-left: 5px;
+  }
+  li {
+    font-weight: 500;
+    margin-right: 5;
+    font-style: oblique;
+    
+  }
+  li:last-child:after {
+    content: '';
+    margin-right: 0;
+    font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+  }
+}
+
+ul.bread_crumb:before, ul.bread_crumb:after {
+  content: "";
+  display: table;
+}

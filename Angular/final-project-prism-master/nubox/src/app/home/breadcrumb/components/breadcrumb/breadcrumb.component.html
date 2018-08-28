@@ -1,0 +1,10 @@
+<ul class="bread_crumb">
+  <!-- -integrating the breadcrub component for displaying the home and categoriesthe-->
+  <li *ngFor="let breadcrumb of breadcrumbs; let i = index;">
+    <a *ngIf="i != breadcrumbs.length - 1; else elseBlock" href="#" class="crumb">
+      <!-- fetching the home and categories-->
+      <span>{{breadcrumb}}</span>
+    </a>
+    <ng-template #elseBlock>{{breadcrumb}}</ng-template>
+  </li>
+</ul>
